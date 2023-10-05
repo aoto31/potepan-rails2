@@ -2,26 +2,40 @@
 <html>
   <head>
     <title>SyukuhakuApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <%= csrf_meta_tags %> 
+    <%= csp_meta_tag %> 
+    <%= stylesheet_link_tag'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%=javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <% if flash[:notice] %>
-      <div class="notification is-info">
-        <p class="notice"><%= notice %></p>
-      </div>
-    <% end %>
+    <div class="notification is-info">
+      <p class="notice"><%= notice %></p>
+    </div>
+    <% end %> 
     <% if flash[:alert] %>
-      <div class="notification is-danger">
-        <p class="alert"><%= alert %></p>
-      </div>
+    <div class="notification is-danger">
+      <p class="alert"><%= alert %></p>
+    </div>
     <% end %>
 
+    <%= render "shared/header" %>
     <%= yield %>
+    <%= render "shared/footer" %>
+
+    <main>
+    
+    </main>
+
+  - if user_signed_in?
+   = link_to "新規投稿", new_post_path, class: "header__right--btn"
+   = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header__right--btn"
+  - else
+   = link_to "ログイン", new_user_session_path, class: "header__right--btn"
+   = link_to "新規登録", new_user_registration_path, class: "header__right--btn"
+
+
   </body>
 </html>

@@ -1,0 +1,28 @@
+<head>
+  <title>宿泊予約サイト</title>
+</head>
+
+<body>
+  <h2 class="top_title">
+    E-Yadoで
+    <br />
+    まだ体験したことのない
+    <br />
+    旅をしよう
+  </h2>
+
+  <div class="FirstViewSearch">
+    <%= form_tag(search_path,:mathod => "get" ) do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag "Search", :name => nil %>
+    <% end %>
+
+    <ul><% @rooms.each do |room| %>
+      <li>
+        <%= link_to room.title, room%>
+        <%= room.created_at %>
+        <%= room.status%>
+      </li>
+      <% end %>
+    </ul>
+</body>
